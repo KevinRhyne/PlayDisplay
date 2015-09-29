@@ -1,17 +1,18 @@
 End-to-End
+========
+SoundMonitor picks up Audio from hardwareController
+SoundMonitor sends Audio through SampleShipper
+SampleShipper returns Song object
+PlayDisplay picks up Song object and delivers to Display
 
-		 SoundMonitor picks up Audio from hardwareController
-		 SoundMonitor sends Audio through SampleShipper
-		 SampleShipper returns Song object
-		 PlayDisplay picks up Song object and delivers to Display
-
-
-- - - - TOP LEVEL
+Top level
+--------
 
 PlayDisplay
 	Grabs Song objects from SoundMonitor, delivers to Displayer
 
-- - - - Back-End classes
+Back-End classes
+--------
 
 SoundMonitor
 	controls hardware / shipping module and returns song information.
@@ -20,7 +21,7 @@ SoundMonitor
 
 HardwareController - Asked to record, returns Audio object
 
-
-- - - - Front-End classes
+Front-End classes
+--------
 
 Displayer
