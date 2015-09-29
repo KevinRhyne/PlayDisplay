@@ -4,7 +4,7 @@ PlayDisplay
 Embedded device that listens for music and displays relevant artwork and information.
 
 
-__End-to-end__  
+**End-to-end**
 SoundMonitor picks up Audio from hardwareController  
 SoundMonitor sends Audio through SampleShipper  
 SampleShipper returns Song object  
@@ -16,7 +16,7 @@ Top level
 PlayDisplay  
 	Grabs Song objects from SoundMonitor, delivers to Displayer
 
-___Back-End functions__  
+**Back-End functions**
 
 SoundMonitor
 	controls hardware / shipping module and returns song information.  
@@ -25,6 +25,6 @@ SoundMonitor
 
 HardwareController - Asked to record, returns Audio object  
 
-__Front-End functions__  
+**Front-End functions**
 
 Displayer
