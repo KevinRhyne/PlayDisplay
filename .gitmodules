@@ -1,3 +1,6 @@
 [submodule "echoprint-codegen"]
-	path = echoprint-codegen
+	path = lib/echoprint-codegen
+	url = https://github.com/echonest/echoprint-codegen.git
+[submodule "lib/echoprint-codegen"]
+	path = lib/echoprint-codegen
 	url = https://github.com/echonest/echoprint-codegen.git
