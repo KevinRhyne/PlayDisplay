@@ -1,12 +1,18 @@
-End-to-End
+PlayDisplay
 ========
+
+Embedded device that listens for music and displays relevant artwork and information.
+
+
+End-to-end
+--------
 SoundMonitor picks up Audio from hardwareController  
 SoundMonitor sends Audio through SampleShipper  
 SampleShipper returns Song object  
 PlayDisplay picks up Song object and delivers to Display  
 
 Top level
---------
+=======
 
 PlayDisplay  
 	Grabs Song objects from SoundMonitor, delivers to Displayer
