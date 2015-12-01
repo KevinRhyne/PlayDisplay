@@ -50,8 +50,8 @@ string EchoPrint::codegen(string filename){
 	    used += strlen(small_buffer);
 	}
 	
-	cout << "I got this from Codgen call: " << (string) big_buffer;
-	return "done";
+	cout << "I got this from Codgen call: " << big_buffer;
+	return big_buffer;
 }
 
 //Sends songCode to echoPrint server, returns result (rawSongInfo)
