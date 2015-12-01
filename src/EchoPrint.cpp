@@ -15,6 +15,7 @@ using namespace std;
 
 string EchoPrint::ID(string filename){
 	string songCode = codegen(filename);
+	cout << "I, ID, have the code: " + songCode << endl;
 	string rawSongInfo = echoServer(songCode);
 	return "done";
 }
@@ -35,8 +36,9 @@ string EchoPrint::JSONtoCode(string codegenOutput){
 	assert(codegenJSON.IsObject());	
 	assert(codegenJSON.HasMember("metadata"));
 	string bitrate = codegenJSON["metadata"]["filename"].GetString();
+	string code = codegenJSON["code"].GetString();
 	cout << "Hello from JSONtoCode, I found metadata.filename to be: " + bitrate << endl;
-	return "done";
+	return code;
 }
 
 
@@ -44,9 +46,7 @@ string EchoPrint::JSONtoCode(string codegenOutput){
 string EchoPrint::codegen(string filename){
 
 	popen("./lib/echoprint-codegen/echoprint-codegen ./src/data/hung21.mp3", "r");
-	JSONtoCode("./bin/json/out.json");
-
-	return "done";
+	return JSONtoCode("./bin/json/out.json");
 }
 
 //Sends songCode to echoPrint server, returns result (rawSongInfo)
