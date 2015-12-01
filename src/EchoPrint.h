@@ -12,6 +12,8 @@
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
 #include <cstdio>
+#include "curl/curl.h"
+#include <sstream>
 
 using namespace std;
 
