@@ -5,11 +5,7 @@
 //
 // Takes Audio object, extracts PCM, recieves Codegen response
 
-#include <stdio.h>
-#include <string>
-#include <iostream>
 #include "EchoPrint.h"
-#include <cstring>
 
 using namespace std;
 
@@ -23,35 +19,34 @@ string EchoPrint::ID(string filename){
 	return "done";
 }
 
+string EchoPrint::JSONtoCode(string codegenOutput){
+
+	FILE* fp = fopen(codegenOutput.c_str(), "r");
+
+	char readBuffer[65536];
+	rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+	rapidjson::Document codegenJSON;
+	codegenJSON.ParseStream(is);
+	fclose(fp);
+
+	//rapidjson::Document codegenJSON;
+
+	//codegenJSON.Parse(codegenOutput.c_str());
+	assert(codegenJSON.IsObject());	
+	assert(codegenJSON.HasMember("metadata"));
+	string bitrate = codegenJSON["metadata"]["filename"].GetString();
+	cout << "Hello from JSONtoCode, I found metadata.filename to be: " + bitrate << endl;
+	return "done";
+}
+
+
 //Calls codegen, returns codegen output (songCode)
 string EchoPrint::codegen(string filename){
 
-	int BIG_SIZE = 4096;
-	int LINE_SIZE = 512;
+	popen("./lib/echoprint-codegen/echoprint-codegen ./src/data/hung21.mp3", "r");
+	JSONtoCode("./bin/json/out.json");
 
-	FILE *fp;
-	fp = popen("../lib/echoprint-codegen/echoprint-codegen ../src/data/hung21.mp3", "r");
-
-	char big_buffer[BIG_SIZE];
-	char small_buffer[LINE_SIZE];
-	unsigned used = 0;
-
-	big_buffer[0] = '\0'; // initialize the big buffer to an empty string
-
-	// read a line data from the child program
-	while (fgets(small_buffer, LINE_SIZE, fp)) {
-	    // check that it'll fit:
-	    size_t len = strlen(small_buffer);
-	    if (used + len >= BIG_SIZE)
-	        break;
-
-	    // and add it to the big buffer if it fits
-	    strcat(big_buffer, small_buffer);
-	    used += strlen(small_buffer);
-	}
-	
-	cout << "I got this from Codgen call: " << big_buffer;
-	return big_buffer;
+	return "done";
 }
 
 //Sends songCode to echoPrint server, returns result (rawSongInfo)
