@@ -16,6 +16,7 @@ string EchoPrint::ID(string filename){
 	string songCode = codegen(filename);
 	cout << "I, ID, have the code: " + songCode << endl;
 	string rawSongInfo = echoServer(songCode);
+	cout << endl << endl << "I, ID, have fingerprinting with the following JSON info: " << rawSongInfo << endl;
 	return "done";
 }
 
@@ -123,9 +124,7 @@ string EchoPrint::echoServer(string songCode){
 	curl_easy_cleanup(curl);
 	fwrite( buffer.c_str(), buffer.length(), sizeof(char), stdout);
 
-	cout << "I GOT THIS IN buffer: " + buffer << endl;
-
 		
-	return "done";
+	return buffer;
 }
 
