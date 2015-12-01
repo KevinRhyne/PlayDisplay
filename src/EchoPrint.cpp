@@ -11,13 +11,14 @@ using namespace std;
 
 //const string CODEGEN_PATH =
 //"../lib/echoprint-codegen/echoprint-codegen";
+// file path is ./src/data/hung21.mp3"
 
 string EchoPrint::ID(string filename){
 	string songCode = codegen(filename);
 	cout << "I, ID, have the code: " + songCode << endl;
 	string rawSongInfo = echoServer(songCode);
 	cout << endl << endl << "I, ID, have fingerprinting with the following JSON info: " << rawSongInfo << endl;
-	return "done";
+	return rawSongInfo;
 }
 
 string EchoPrint::JSONtoCode(string codegenOutput){
@@ -45,7 +46,8 @@ string EchoPrint::JSONtoCode(string codegenOutput){
 //Calls codegen, returns codegen output (songCode)
 string EchoPrint::codegen(string filename){
 
-	popen("./lib/echoprint-codegen/echoprint-codegen ./src/data/hung21.mp3", "r");
+	string commander = "./lib/echoprint-codegen/echoprint-codegen "+ filename;
+	popen(commander.c_str(), "r");
 	cout << "Wait for codegen";
 	cin.ignore();
 	return JSONtoCode("./bin/json/out.json");
