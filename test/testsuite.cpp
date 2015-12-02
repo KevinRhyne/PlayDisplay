@@ -3,6 +3,7 @@
 #include "SoundMonitor.h"
 #include "AudioInputController.h"
 #include "Song.h"
+#include "Displayer.h"
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -24,20 +25,25 @@ int main() {
     		  "\n TITLE: " + dummySong.getTitle() +
     		  "\n ALBUM: " + dummySong.getAlbum() << endl << endl;
 
-    */
+    
     SoundMonitor soundmonitor;
     Song latestSong = soundmonitor.update();
     cout << string("\n\n\nI am tester, SoundMonitor gave me the latest track: ") +
               "\n ARTIST: " + latestSong.getArtist() +
               "\n TITLE: " + latestSong.getTitle() +
               "\n ALBUM: " + latestSong.getAlbum() << endl << endl;
-
-    latestSong = soundmonitor.update();
+  */
+    SoundMonitor soundmonitor;
+    Song latestSong = soundmonitor.update();
     cout << string("\n\n\nI am tester, SoundMonitor 2nd run gave me the latest track: ") +
               "\n ARTIST: " + latestSong.getArtist() +
               "\n TITLE: " + latestSong.getTitle() +
               "\n ALBUM: " + latestSong.getAlbum() << endl << endl;
+    
+    
 
+  Displayer display;
+  display.displaySong(latestSong);
 
     return 0;
 }
