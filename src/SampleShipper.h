@@ -5,9 +5,12 @@
 #ifndef SAMPLESHIPPER_H
 #define SAMPLESHIPPER_H
 
+#include "Song.h"
+
 class SampleShipper {
 	public:
-		string ship(string);
+		Song ship(string);
+		
 
 };
 
