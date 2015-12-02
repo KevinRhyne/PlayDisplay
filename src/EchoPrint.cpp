@@ -47,9 +47,8 @@ string EchoPrint::JSONtoCode(string codegenOutput){
 string EchoPrint::codegen(string filename){
 
 	string commander = "./lib/echoprint-codegen/echoprint-codegen "+ filename;
-	popen(commander.c_str(), "r");
-	cout << "Wait for codegen";
-	cin.ignore();
+	FILE* codegenCommander = popen(commander.c_str(), "r");
+	pclose(codegenCommander);
 	return JSONtoCode("./bin/json/out.json");
 }
 

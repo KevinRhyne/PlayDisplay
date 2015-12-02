@@ -39,6 +39,6 @@ void Displayer::displaySong(Song latestSong){
 
     imshow( "Display window", fullDisplay ); 
 
-    waitKey(0);                                          // Wait for a keystroke in the window
+    waitKey(3000);                                          // Wait for a keystroke in the window
 	
 }
