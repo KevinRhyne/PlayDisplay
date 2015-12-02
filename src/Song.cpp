@@ -17,9 +17,9 @@ string Song::getTitle() {
 }
 
 string Song::getAlbum() {
-	return title;
+	return album;
 }
 
 string Song::getArtist() {
-	return title;
+	return artist;
 }

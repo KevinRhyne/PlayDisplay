@@ -25,7 +25,7 @@ string EchoPrint::JSONtoCode(string codegenOutput){
 
 	FILE* fp = fopen(codegenOutput.c_str(), "r");
 
-	char readBuffer[65536];
+	char readBuffer[4096] = {0};
 	rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
 	rapidjson::Document codegenJSON;
 	codegenJSON.ParseStream(is);
@@ -66,7 +66,8 @@ size_t curl_write( void *ptr, size_t size, size_t nmemb, void *stream)
 //Sends songCode to echoPrint server, returns result (rawSongInfo)
 string EchoPrint::echoServer(string songCode){
 
-	
+	buffer.clear();
+
 	string curlRequest = "http://1.1.1.127:8080/query?fp_code=" + songCode;
 		
 
