@@ -18,6 +18,7 @@ string EchoPrint::ID(string filename){
 	cout << "I, ID, have the code: " + songCode << endl;
 	string rawSongInfo = echoServer(songCode);
 	cout << endl << endl << "I, ID, have fingerprinting with the following JSON info: " << rawSongInfo << endl;
+
 	return rawSongInfo;
 }
 
@@ -39,6 +40,9 @@ string EchoPrint::JSONtoCode(string codegenOutput){
 	string bitrate = codegenJSON["metadata"]["filename"].GetString();
 	string code = codegenJSON["code"].GetString();
 	cout << "Hello from JSONtoCode, I found metadata.filename to be: " + bitrate << endl;
+	cout << "JSONtoCode: Here is the code I got: " << code << endl;
+	cout << "\nPausing before returning up.";
+
 	return code;
 }
 
@@ -49,6 +53,7 @@ string EchoPrint::codegen(string filename){
 	string commander = "./lib/echoprint-codegen/echoprint-codegen "+ filename;
 	FILE* codegenCommander = popen(commander.c_str(), "r");
 	pclose(codegenCommander);
+
 	return JSONtoCode("./bin/json/out.json");
 }
 
@@ -78,7 +83,10 @@ string EchoPrint::echoServer(string songCode){
 	curl_easy_cleanup(curl);
 	fwrite( buffer.c_str(), buffer.length(), sizeof(char), stdout);
 
-		
+	if (buffer.length() > 3000) {
+		buffer = "{\"artist\": \"NOARTIST\", \"track\": \"NOTRACK\", \"track_id\": \"TRUCCPM1515BB84DDF-0\", \"codever\": \"4.12\", \"length\": 159, \"score\": 6.2522736, \"source\": \"local\", \"release\": \"NORELEASE\"}";
+	}
+
 	return buffer;
 }
 

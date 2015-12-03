@@ -12,10 +12,6 @@ Song SampleShipper::ship(string filepath){
 	string result;
 	result = echoprint.ID(filepath);
 	Song constructedSong = stringToSong(result);
-	getMBID("dummy");
-	//result = echoprint.ID(filepath);
-	//cout << "Hi, SampleShipper.ship sent filepath " + filepath << endl;
-	//cout << "And has a JSON ID of " << result << endl << endl;
 
 	return constructedSong;
 
@@ -24,8 +20,10 @@ Song SampleShipper::ship(string filepath){
 
 Song SampleShipper::stringToSong(string jsonString){
 	cout << "\n\nI am stringToSong and I have the following string to parse...\n\n\n" << jsonString << endl;
-	rapidjson::Document songJSONobject;
-	songJSONobject.Parse(jsonString.c_str());
+
+		rapidjson::Document songJSONobject;
+		songJSONobject.Parse(jsonString.c_str());
+		
 	//assert(songJSONobject.IsObject());
 
 	return Song(songJSONobject["track"].GetString(), songJSONobject["release"].GetString(), songJSONobject["artist"].GetString());
@@ -33,11 +31,14 @@ Song SampleShipper::stringToSong(string jsonString){
 
 std::string mbidbuf;
 
+
+/*
 size_t mbid_curl_write( void *ptr, size_t size, size_t nmemb, void *stream)
 {
 	mbidbuf.append((char*)ptr, size*nmemb);
 	return size*nmemb;
 }
+
 
 
 string SampleShipper::getMBID(string Album){
@@ -61,3 +62,4 @@ string SampleShipper::getMBID(string Album){
 	return mbidbuf;
 
 }
+*/
