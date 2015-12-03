@@ -7,7 +7,7 @@ using namespace std;
 void Displayer::displaySong(Song latestSong){
 
     Mat image;
-    image = imread("./bin/albumimage.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
+    image = imread("./bin/fetchedart.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
     Size imageSize = image.size();
 
 

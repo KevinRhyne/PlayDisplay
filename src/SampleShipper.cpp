@@ -5,6 +5,7 @@
 #include "SampleShipper.h"
 #include "EchoPrint.h"
 #include "Song.h"
+#include <boost/algorithm/string.hpp>
 
 Song SampleShipper::ship(string filepath){
 
@@ -13,7 +14,7 @@ Song SampleShipper::ship(string filepath){
 	result = echoprint.ID(filepath);
 	Song constructedSong = stringToSong(result);
 
-	getArt(getMBID("yuh"));
+	getArt(getMBID(constructedSong.getAlbum()));
 
 	return constructedSong;
 
@@ -43,9 +44,12 @@ string SampleShipper::getMBID(string Album){
 
 	mbidbuf.clear();
 
-	string curlRequest = "http://musicbrainz.org/ws/2/recording?query=release:u%%20guessed%%20it&fmt=json&limit=1";
-		
+	string curlRequest = "http://musicbrainz.org/ws/2/recording?query=release:\"" + Album + "\"&fmt=json&limit=1";
+	size_t pos = 0;
 
+ 	boost::replace_all(curlRequest, " ", "%%20");
+
+  	cout << "Stringed request:" << curlRequest << endl;
 
 	CURL *curl = curl_easy_init();
 	curl_easy_setopt(curl, CURLOPT_URL, curlRequest.c_str()); 
