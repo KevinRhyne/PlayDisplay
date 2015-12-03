@@ -12,7 +12,7 @@ void Displayer::displaySong(Song latestSong){
 
 
     //Create textbox
-    Mat textbox = Mat::zeros(400, imageSize.width, CV_8UC3 );
+    Mat textbox = Mat::zeros(420, imageSize.width, CV_8UC3 );
 
     string titleText  = "Track: " + latestSong.getTitle();
     string albumText  = "Album: " + latestSong.getAlbum();

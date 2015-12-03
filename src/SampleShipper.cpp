@@ -13,6 +13,8 @@ Song SampleShipper::ship(string filepath){
 	result = echoprint.ID(filepath);
 	Song constructedSong = stringToSong(result);
 
+	getMBID("yuh");
+
 	return constructedSong;
 
 
@@ -32,7 +34,7 @@ Song SampleShipper::stringToSong(string jsonString){
 std::string mbidbuf;
 
 
-/*
+
 size_t mbid_curl_write( void *ptr, size_t size, size_t nmemb, void *stream)
 {
 	mbidbuf.append((char*)ptr, size*nmemb);
@@ -55,11 +57,23 @@ string SampleShipper::getMBID(string Album){
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, mbid_curl_write);
 	curl_easy_perform(curl);
 	curl_easy_cleanup(curl);
-	fwrite( mbidbuf.c_str(), mbidbuf.length(), sizeof(char), stdout);
+	//fwrite( mbidbuf.c_str(), mbidbuf.length(), sizeof(char), stdout);
 
 	// cout << "getMBID got the following JSON response: " << mbidbuf;
 
-	return mbidbuf;
+	return JSONtoMBID(mbidbuf);
 
 }
-*/
+
+string SampleShipper::JSONtoMBID(string latest){
+
+	rapidjson::Document mbResponse;
+	mbResponse.Parse(mbidbuf.c_str());
+	assert(mbResponse.HasMember("recordings"));
+	assert(mbResponse["recordings"][0].HasMember("releases"));
+
+	string MBID = mbResponse["recordings"][0]["releases"][0]["id"].GetString();
+
+	return MBID;
+
+}

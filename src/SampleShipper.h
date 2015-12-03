@@ -17,6 +17,7 @@ class SampleShipper {
 	private:
 		Song stringToSong(string);
 		string getMBID(string);
+		string JSONtoMBID(string);
 
 };
 
