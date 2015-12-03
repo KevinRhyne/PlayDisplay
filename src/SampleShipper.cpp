@@ -14,6 +14,10 @@ Song SampleShipper::ship(string filepath){
 	result = echoprint.ID(filepath);
 	Song constructedSong = stringToSong(result);
 
+	if (constructedSong.getArtist() == "NOARTIST") {
+		return constructedSong;
+	}
+
 	getArt(getMBID(constructedSong.getAlbum()));
 
 	return constructedSong;

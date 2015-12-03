@@ -11,9 +11,13 @@ Song SoundMonitor::update(){
 	AudioInputController audioinput;
 	SampleShipper sampleshipper;
 
-	string filename = audioinput.recordSample();
+	Song latestSong("NULL", "NULL", "NOARTIST");
+	string filename;
 
-	Song latestSong = sampleshipper.ship(filename);
+	while(latestSong.getArtist() == "NOARTIST") {
+		filename = audioinput.recordSample();
+		latestSong = sampleshipper.ship(filename);
+	}
 
 	return latestSong;
 
