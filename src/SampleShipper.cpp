@@ -13,10 +13,9 @@ Song SampleShipper::ship(string filepath){
 	result = echoprint.ID(filepath);
 	Song constructedSong = stringToSong(result);
 
-	getMBID("yuh");
+	getArt(getMBID("yuh"));
 
 	return constructedSong;
-
 
 }
 
@@ -33,15 +32,11 @@ Song SampleShipper::stringToSong(string jsonString){
 
 std::string mbidbuf;
 
-
-
 size_t mbid_curl_write( void *ptr, size_t size, size_t nmemb, void *stream)
 {
 	mbidbuf.append((char*)ptr, size*nmemb);
 	return size*nmemb;
 }
-
-
 
 string SampleShipper::getMBID(string Album){
 
@@ -69,11 +64,31 @@ string SampleShipper::JSONtoMBID(string latest){
 
 	rapidjson::Document mbResponse;
 	mbResponse.Parse(mbidbuf.c_str());
-	assert(mbResponse.HasMember("recordings"));
-	assert(mbResponse["recordings"][0].HasMember("releases"));
+	//assert(mbResponse.HasMember("recordings"));
+	//assert(mbResponse["recordings"][0].HasMember("releases"));
 
 	string MBID = mbResponse["recordings"][0]["releases"][0]["id"].GetString();
 
 	return MBID;
 
+}
+
+void SampleShipper::getArt(string MBID){
+
+	CoverArtArchive::CCoverArt CoverArt("example-1.0");
+
+	std::vector<unsigned char> ImageData=CoverArt.FetchFront(MBID);
+
+    if (ImageData.size())
+    {
+            string FileName = "./bin/fetchedart.jpg";
+
+            std::ofstream Front(FileName.c_str());
+            Front.write((const char *)&ImageData[0],ImageData.size());
+            Front.close();
+    }
+
+    string resize = "convert ./bin/fetchedart.jpg -resize 800x800 ./bin/fetchedart.jpg";
+	FILE* resizeHandle = popen(resize.c_str(), "r");
+	pclose(resizeHandle);
 }

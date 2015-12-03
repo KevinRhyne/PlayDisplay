@@ -10,6 +10,8 @@
 #include "rapidjson/filereadstream.h"
 #include <cstdio>
 #include "curl/curl.h"
+#include "coverart/CoverArt.h"
+#include <fstream>
 
 class SampleShipper {
 	public:
@@ -18,7 +20,7 @@ class SampleShipper {
 		Song stringToSong(string);
 		string getMBID(string);
 		string JSONtoMBID(string);
-
+		void getArt(string);
 };
 
 #endif
