@@ -24,4 +24,6 @@ PlayDisplay takes a microphone recording, generates a fingerprint code, and requ
 
 Repeat forever.
 
+Class Hierarchy
+--------
 ![UML classes for PlayDisplay](https://github.com/KevinRhyne/PlayDisplay/blob/master/UML_PNG.png)
