@@ -3,12 +3,13 @@ PlayDisplay
 
 Standalone embedded device listens to music in a room and displays album artwork and release info.
 
-
-**End-to-end: Overview**  
+End-to-end
+--------
+**Overview**  
 
 PlayDisplay takes a microphone recording, generates a fingerprint code, and requests an matching fingerprint from a user-run EchoPrint server (containing the music fingerprint database). Once PlayDisplay recieves the track information, artwork is retrieved from an online album artwork database and draws the screen with the artwork, track, artist, and album information.
 
-**End-to-end: Detailed**
+**Detailed**
 
 1. **SoundMonitor** object requests a new microphone sample through **AudioInputController** object.
 2. **SoundMonitor** passes sample filepath through to **SampleShipper** and then through to **EchoPrint** object.
@@ -23,32 +24,4 @@ PlayDisplay takes a microphone recording, generates a fingerprint code, and requ
 
 Repeat forever.
 
-Top level
---------
-
-PlayDisplay  
-* Grabs Song objects from SoundMonitor, delivers to Displayer
-
-**Back-End functions**
-
-SoundMonitor (SM)
-* controls hardware / shipping module
-* returns Song objects
-* Audio is not passed any higher than this level.  
-* Update loops are done at this level  
-* Can be asked for "status" string (monitoring, IDing, ready)
-
-HardwareController
-* Asked by SM to record, returns Audio object 
-
-SampleShipper  
-* takes Audio, sends through EchoPrint, returns Song to SoundMonitor
-
-EchoPrint
-* uses Codegen library
-* PCM: buffer of floats, mono, 11025Hz
-* Returns 
-
-**Front-End functions**
-
-Displayer - Takes Song object, displays information
+![UML classes for PlayDisplay](https://github.com/KevinRhyne/PlayDisplay/blob/master/UML_PNG.png)
