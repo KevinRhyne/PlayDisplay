@@ -7,7 +7,7 @@ End-to-end
 --------
 **Overview**  
 
-PlayDisplay takes a microphone recording, generates a fingerprint code, and requests an matching fingerprint from a user-run EchoPrint server (containing the music fingerprint database). Once PlayDisplay recieves the track information, artwork is retrieved from an online album artwork database and draws the screen with the artwork, track, artist, and album information.
+PlayDisplay takes a microphone recording, generates a fingerprint code, and requests a matching fingerprint from a user-run EchoPrint server (containing the music fingerprint database). Once PlayDisplay recieves the track information, artwork is retrieved from an online album artwork database and draws the screen with the artwork, track, artist, and album information.
 
 **Detailed**
 
